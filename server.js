@@ -1,6 +1,17 @@
 import express, { request } from 'express'
 const app = express()
 
+const shoes = [
+    { name: "Birkenstocks", price: 50, type: "sandal" },
+    { name: "Air Jordans", price: 500, type: "sneaker" },
+    { name: "Air Mahomeses", price: 501, type: "sneaker" },
+    { name: "Utility Boots", price: 20, type: "boot" },
+    { name: "Velcro Sandals", price: 15, type: "sandal" },
+    { name: "Jet Boots", price: 1000, type: "boot" },
+    { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+];
+
+
 const collectibles = [
     { name: 'shiny ball', price: 5.95 },
     { name: 'autographed picture of a dog', price: 10 },
@@ -8,9 +19,9 @@ const collectibles = [
   ];
 
 
-//exercise 1:
-app.get('/greetings/:name', (req,res) => {
-res.send(`<h1>Greetings${req.params.name}.<h1>`)
+//exercise 1: be polite, greet user
+app.get('/greetings/:username', (req,res) => {
+res.send(`<h1>Greetings${req.params.username}.<h1>`)
 })
 
 //exercise 2: Rolling dice 
@@ -30,9 +41,23 @@ app.get('/collectibles/:index', (req,res) => {
     }
 });
 
-//
+//exercise 4: filter shoes by query parameters
 
+app.get('/shoes', (req, res) => {
+const {minPrice,maxPrice,type} = req.query;
+    let filtershoes = shoes;
+if (type){
+    filtershoes = filtershoes.filter((shoes) => shoes.type === type);
+}
+if (minPrice) {
+    filtershoes = filtershoes.filter((shoes) => shoe.price >= minPrice);
+}
+if (maxPrice) {
+    filtershoes = filtershoes.filter((shoe) => shoe.price <= maxPrice);
+}
+    res.send(filtershoes);
 
+});
 
 
 
