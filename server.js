@@ -22,18 +22,15 @@ app.get('/roll/:number', (req,res) => {
 // exercise 3: I want that one!
 app.get('/collectibles/:index', (req,res) => {
     if (collectibles[req.params.index]) {
-        let name = collectibles[req.params.name];
-        let price = collectibles[req.params.price];
+        let name = collectibles[req.params.index].name;
+        let price = collectibles[req.params.index].price;
         res.send(`<h2>So you want the ${name} for the listed ${price}<h2>`)
     } else { 
             res.send('<h2>This item is currently out of stock. Please check back soon.</h2>')
     }
-}
+});
 
-
-)
-
-
+//
 
 
 
